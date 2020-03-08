@@ -47,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("MainActivity", "开始耗时任务");
                 mViewModel.startTask();
+                new Thread(){
+                    @Override
+                    public void run() {
+                        int count = 0;
+                        while (true) {
+                            //请求网络数据、数据库、加载大图等。
+                            //如果在Activity转屏的时候取消这些任务，那恢复的时候就要重新加载，势必浪费资源
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            count = count +1;
+                            Log.w("doujinhaiyu", "run: 1111111"+count );
+
+                        }
+
+                    }
+                }.start();
             }
         });
 
